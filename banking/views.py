@@ -88,8 +88,8 @@ def all_accounts(request):
 
 
 @api_view(['GET'])
-def account_detail(request,id):
-    data = get_object_or_404(Account,pk=id)
+def account_detail(request,account_no):
+    data = get_object_or_404(Account,account_no=account_no)
     serializer = AccountSerializer(data)
     return Response(serializer.data, status=status.HTTP_200_OK)
 

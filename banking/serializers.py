@@ -19,7 +19,7 @@ class AccountSerializer(serializers.ModelSerializer):
        
 
 
-class TransactionSerializer(serializers.ModelSerializer):
+class TransactionSerializer(serializers.Serializer):
     amount = serializers.DecimalField(max_digits=15, decimal_places=2)
     def validate_amount(self,value):
         if value <= 0:

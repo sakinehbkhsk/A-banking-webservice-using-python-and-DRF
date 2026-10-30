@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('accounts/', create_account, name='create_account'),
     path ('accounts/all', all_accounts, name='all_accounts'),
-    path('accounts/<int:id>/', account_detail, name='account_detail'),
+    path('accounts/<str:account_no>/', account_detail, name='account_detail'),
 
-    path ('credit_account/<str:account_no>/credit/', credit_account, name='credit_account'),
+    path ('accounts/<str:account_no>/credit/', credit_account, name='credit_account'),
     ]
