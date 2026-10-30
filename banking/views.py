@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Customer,Account
 
-from .serializers import CustomerSerializer, AccountSerializer
+from .serializers import CustomerSerializer, AccountSerializer, TransactionSerializer
 
 """
 customer part with different views ... create customer, all customers , customer
@@ -103,4 +103,15 @@ def customer_accounts(request,customer_no):
 
 @api_view(['POST'])
 def credit_account(request,account_no):
-    ...
+    account = get_object_or_404(Account, account_no=account_no)
+    serializer = TransactionSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    amount = serializer.validated_data['amount']
+
+    if account.account_status == Account.AccountStatus.CLOSED:
+        return Response({"error":"Account is closed."}, status=status.HTTP_403_FORBIDDEN)
+
+    account.account_balance += amount
+    account.save(update_fields=['account_balance'])
+    return Response({"message": "Credit successful.", "account_no": account.account_no,
+                      "account_balance": account.account_balance}, status=status.HTTP_200_OK)
