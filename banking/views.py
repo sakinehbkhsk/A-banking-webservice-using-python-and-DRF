@@ -28,5 +28,5 @@ def create_customer(request):
 def all_customers(request):
     data = Customer.objects.all()
     serializer = CustomerSerializer(data, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
