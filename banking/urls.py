@@ -7,5 +7,5 @@ urlpatterns = [
 
     path('customers/', create_customer, name='create_customer'),
     path('customers/all', all_customers, name='all_customers'),
-    path('customers/{id}', customer, name='customer'),
+    path('customer/<int:id>/', customer, name='customer'),
 ]

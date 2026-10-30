@@ -32,6 +32,6 @@ def all_customers(request):
 
 @api_view(['GET'])
 def customer(request,id):
-    data = get_object_or_404(pk=id)
+    data = get_object_or_404(Customer, pk=id)
     serializer = CustomerSerializer(data)
     return Response(serializer.data, status=status.HTTP_200_OK)
