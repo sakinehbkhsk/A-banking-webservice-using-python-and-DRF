@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 
 from rest_framework.decorators import api_view
@@ -30,3 +30,8 @@ def all_customers(request):
     serializer = CustomerSerializer(data, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def customer(request,id):
+    data = get_object_or_404(pk=id)
+    serializer = CustomerSerializer(data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
