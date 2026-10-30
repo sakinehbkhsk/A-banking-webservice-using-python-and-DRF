@@ -4,7 +4,8 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
 
-    
+    def __str__(self):
+        return str(self.id)
 
 
 class Account(models.Model):
