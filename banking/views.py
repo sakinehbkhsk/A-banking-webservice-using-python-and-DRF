@@ -8,6 +8,9 @@ from .models import Customer
 
 from .serializers import CustomerSerializer
 
+"""
+customer part with different views ... create customer, all customers , customer
+"""
 
 @api_view(['POST'])
 def create_customer(request):
@@ -35,3 +38,35 @@ def customer(request,id):
     data = get_object_or_404(Customer, pk=id)
     serializer = CustomerSerializer(data)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+"""
+ customer part with just one view ...
+
+"""
+
+@api_view(['GET', 'POST'])
+def list_customers(request, id=None):
+    if request.method == 'GET':
+        if id is None:
+            data = Customer.objects.all()
+            serializer = CustomerSerializer(data, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            data = get_object_or_404(Customer, pk=id)
+            serializer = CustomerSerializer(data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    elif request.method == 'POST':
+        serializer = CustomerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
