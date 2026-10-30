@@ -85,3 +85,11 @@ def all_accounts(request):
     data= Account.objects.all()
     serializer = AccountSerializer(data, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def account_detail(request,id):
+    data = get_object_or_404(Account,pk=id)
+    serializer = AccountSerializer(data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+    
