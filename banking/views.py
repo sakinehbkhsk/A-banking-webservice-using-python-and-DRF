@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Customer
 
-from .serializers import CustomerSerializer
+from .serializers import CustomerSerializer, AccountSerializer
 
 """
 customer part with different views ... create customer, all customers , customer
@@ -70,3 +70,12 @@ def list_customers(request, id=None):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+@api_view(['POST'])
+def create_account(request):
+    serializer = AccountSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
