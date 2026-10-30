@@ -12,7 +12,8 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 
 class AccountSerializer(serializers.ModelSerializer):
+    customer_no = serializers.PrimaryKeyRelatedField(queryset = Customer.objects.all(), source = 'customer')
     class Meta:
         model = Account
-        fields = '__all__'
+        fields = ['id', 'account_no', 'customer_no', 'account_status', 'account_balance']
         read_only_fields = ['id', 'account_status', 'account_balance']
