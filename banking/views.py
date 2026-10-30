@@ -99,3 +99,8 @@ def customer_accounts(request,customer_no):
     data = Account.objects.filter(customer_id=customer_no)
     serializer = AccountSerializer(data, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def credit_account(request,account_no):
+    ...
