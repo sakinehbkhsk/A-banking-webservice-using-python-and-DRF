@@ -115,3 +115,22 @@ def credit_account(request,account_no):
     account.save(update_fields=['account_balance'])
     return Response({"message": "Credit successful.", "account_no": account.account_no,
                       "account_balance": account.account_balance}, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def debit_account(request,account_no):
+    account = get_object_or_404(Account, account_no=account_no)
+    serializer = TransactionSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    amount = serializer.validated_data['amount']
+
+    if account.account_status != Account.AccountStatus.OPEN:
+        return Response({"error":"Account is not OPEN."}, status=status.HTTP_403_FORBIDDEN)
+
+    if amount > account.account_balance:
+        return Response({"error":"Insufficient funds"},status=status.HTTP_400_BAD_REQUEST)
+    
+    account.account_balance -= amount
+    account.save(update_fields=['account_balance'])
+    return Response({"message":"Debit successful.", "account_no": account.account_no,
+                     "account_balance": account.account_balance}, status=status.HTTP_200_OK)
