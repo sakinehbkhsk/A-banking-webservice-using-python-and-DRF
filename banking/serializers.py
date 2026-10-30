@@ -16,4 +16,12 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['id', 'account_no', 'customer_no', 'account_status', 'account_balance']
-        read_only_fields = ['id', 'account_status', 'account_balance']
+       
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    amount = serializers.DecimalField(max_digits=15, decimal_places=2)
+    def validate_amount(self,value):
+        if value <= 0:
+            raise serializers.ValidationError (" Amount must be positive and greater than zero.")
+        return value
