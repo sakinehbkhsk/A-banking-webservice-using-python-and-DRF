@@ -92,4 +92,10 @@ def account_detail(request,id):
     data = get_object_or_404(Account,pk=id)
     serializer = AccountSerializer(data)
     return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
+
+@api_view(['GET'])
+def customer_accounts(request,customer_no):
+    data = Account.objects.filter(customer_id=customer_no)
+    serializer = AccountSerializer(data, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
