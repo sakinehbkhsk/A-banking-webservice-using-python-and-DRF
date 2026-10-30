@@ -1,7 +1,7 @@
 
 
 from django.urls import path
-from .views import create_customer, all_customers, customer, list_customers
+from .views import create_customer, all_customers, customer, list_customers, create_account
 
 urlpatterns = [
 
@@ -12,4 +12,6 @@ urlpatterns = [
     
     path('customers/', list_customers, name='list_customers'),
     path('customers/<int:id>', list_customers, name='customer'),
+
+    path('accounts/', create_account, name='create_account'),
     ]
