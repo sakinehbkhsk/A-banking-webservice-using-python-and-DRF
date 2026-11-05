@@ -49,9 +49,9 @@ The database configuration is defined in settings.py
 
 ## Run the Project
 
-python manage.py makemigrations
-python manage.py migrate
-python manage.py runserver
+- python manage.py makemigrations
+- python manage.py migrate
+- python manage.py runserver
 The server will run at: http://127.0.0.1:8000
 
 
