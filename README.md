@@ -57,14 +57,14 @@ The database configuration is defined in settings.py
 
 ## API Endpoints and Examples
 
-| POST | api/customers/ | create_customer |
-| GET | api/customers/all | all_customers |
+- | POST | api/customers/ | create_customer |
+- | GET | api/customers/all | all_customers |
 
-| POST | api/accounts/ | create_account |
-| GET |  api/accounts/all  | all_accounts |
+- | POST | api/accounts/ | create_account |
+- | GET |  api/accounts/all  | all_accounts |
 
-| POST | api/accounts/5000/credit/ | credit_account |
-|  POST | api/accounts/5000/debit/ | debit_account |
+- | POST | api/accounts/5000/credit/ | credit_account |
+- |  POST | api/accounts/5000/debit/ | debit_account |
 
 
 
