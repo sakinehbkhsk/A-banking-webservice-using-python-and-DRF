@@ -52,7 +52,7 @@ The database configuration is defined in settings.py
 - python manage.py makemigrations
 - python manage.py migrate
 - python manage.py runserver
-The server will run at: http://127.0.0.1:8000
+- The server will run at: http://127.0.0.1:8000
 
 
 ## API Endpoints and Examples
