@@ -1,7 +1,7 @@
 
 
 from django.urls import path
-from .views import CustomerListView, CustomerCreateView, CustomerDetailView,AccountListView, AccountListView, AccountCreateView, AccountDetailView, CustomerAccountsView, CreditAccountView, DebitAccountView
+from .views import CustomerListView, CustomerCreateView, CustomerDetailView, AccountListView, AccountCreateView, AccountDetailView, CustomerAccountsView, CreditAccountView, DebitAccountView
 urlpatterns = [
 
     #customer urls
