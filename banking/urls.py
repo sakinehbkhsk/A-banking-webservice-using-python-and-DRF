@@ -1,23 +1,21 @@
 
 
 from django.urls import path
-from .views import create_customer, all_customers, customer, list_customers, create_account, all_accounts, account_detail, customer_accounts, credit_account, debit_account
-
+from .views import CustomerListView, CustomerCreateView, CustomerDetailView,AccountListView, AccountListView, AccountCreateView, AccountDetailView, CustomerAccountsView, CreditAccountView, DebitAccountView
 urlpatterns = [
 
-  
-    path('customers/', create_customer, name='create_customer'),
-    path('customers/all', all_customers, name='all_customers'),
-    path('customer/<int:id>/', customer, name='customer'),
-    path('customers/<int:customer_no>/accounts/', customer_accounts, name='cusotmer_accounts'),
-    
-    path('customers/', list_customers, name='list_customers'),
-    path('customers/<int:id>', list_customers, name='customer'),
+    #customer urls
+    path('customers/', CustomerListView.as_view(), name='customer-list'),
+    path('customers/create/', CustomerCreateView.as_view(), name='customer-create'),
+    path('customers/<int:customer_no>/', CustomerDetailView.as_view(), name='customer-detail'),
+    path('customers/<int:customer_no>/accounts/', CustomerAccountsView.as_view(), name='customer-accounts'),
 
-    path('accounts/', create_account, name='create_account'),
-    path ('accounts/all', all_accounts, name='all_accounts'),
-    path('accounts/<str:account_no>/', account_detail, name='account_detail'),
+    #account urls
+    path('accounts/', AccountListView.as_view(), name='account-list'),
+    path ('accounts/create/', AccountCreateView.as_view(), name='account-create'),
+    path('accounts/<str:account_no>/', AccountDetailView.as_view(), name='account_detail'),
 
-    path ('accounts/<str:account_no>/credit/', credit_account, name='credit_account'),
-    path('accounts/<str:account_no>/debit/', debit_account, name='debit_account'),
+    #Transaction urls
+    path ('accounts/<str:account_no>/credit/', CreditAccountView.as_view(), name='credit_account'),
+    path('accounts/<str:account_no>/debit/', DebitAccountView.as_view(), name='debit_account'),
     ]
