@@ -55,16 +55,95 @@ The database configuration is defined in settings.py
 - The server will run at: http://127.0.0.1:8000
 
 
-## API Endpoints and Examples
+## API Endpoints
 
-- | POST | api/customers/ | create_customer |
-- | GET | api/customers/all | all_customers |
+All API endpoints use the following base URL:
 
-- | POST | api/accounts/ | create_account |
-- | GET |  api/accounts/all  | all_accounts |
+```text
+http://127.0.0.1:8000/api/
+```
 
-- | POST | api/accounts/5000/credit/ | credit_account |
-- |  POST | api/accounts/5000/debit/ | debit_account |
+### Customer Endpoints
+
+| HTTP Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/customers/create/` | Create a new customer |
+| GET | `/api/customers/` | Retrieve all customers |
+| GET | `/api/customers/{customer_no}/` | Retrieve customer details |
+| GET | `/api/customers/{customer_no}/accounts/` | Retrieve all accounts belonging to a customer |
+
+### Account Endpoints
+
+| HTTP Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/accounts/create/` | Create a new account |
+| GET | `/api/accounts/` | Retrieve all accounts |
+| GET | `/api/accounts/{account_no}/` | Retrieve account details |
+
+### Transaction Endpoints
+
+| HTTP Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/accounts/{account_no}/credit/` | Deposit money into an account |
+| POST | `/api/accounts/{account_no}/debit/` | Withdraw money from an account |
+
+### Example Requests
+
+**1. Create a Customer**
+
+`POST /api/customers/create/`
+
+```json
+{
+    "first_name": "Ali",
+    "last_name": "Ahmadi"
+}
+```
+
+**2. Create an Account**
+
+`POST /api/accounts/create/`
+
+```json
+{
+    "account_no": "5000",
+    "customer_no": 1
+}
+```
+
+**3. Credit an Account**
+
+`POST /api/accounts/5000/credit/`
+
+```json
+{
+    "amount": "1000.00"
+}
+```
+
+**4. Debit an Account**
+
+`POST /api/accounts/5000/debit/`
+
+```json
+{
+    "amount": "300.00"
+}
+```
+
+
+### Running Tests
+
+Run the automated API tests using:
+
+```bash
+python manage.py test banking
+```
+
+The tests cover:
+- Creating an account.
+- Retrieving a non-existing account.
+- Attempting to debit a blocked account.
 
 
 
